@@ -10,7 +10,9 @@
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
+<meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://smartposapp.net/">
+<link rel="alternate" hreflang="es-DO" href="https://smartposapp.net/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SmartPOS">
 <meta property="og:locale" content="es_DO">
@@ -40,6 +42,114 @@
   var s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id=G-PFV7B84JB6'; document.head.appendChild(s);
   gtag('js',new Date()); gtag('config','G-PFV7B84JB6');
 })();
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://smartposapp.net/#org",
+   "name": "SmartPOS",
+   "url": "https://smartposapp.net/",
+   "logo": "https://smartposapp.net/assets/icon-512.png",
+   "parentOrganization": {
+    "@type": "Organization",
+    "name": "TSI Dominicana",
+    "url": "https://tsi.com.do"
+   }
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://smartposapp.net/#website",
+   "url": "https://smartposapp.net/",
+   "name": "SmartPOS",
+   "inLanguage": "es-DO",
+   "publisher": {
+    "@id": "https://smartposapp.net/#org"
+   }
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://smartposapp.net/#app",
+   "name": "SmartPOS",
+   "applicationCategory": "BusinessApplication",
+   "operatingSystem": "Android",
+   "inLanguage": "es-DO",
+   "description": "App para vendedores de ruta de República Dominicana: ventas y cobros con o sin internet, GPS, aprobaciones, impresión, facturación electrónica y conexión con tu ERP.",
+   "url": "https://smartposapp.net/",
+   "image": "https://smartposapp.net/assets/og-image.jpg",
+   "downloadUrl": "https://play.google.com/store/apps/details?id=com.smarttec.smartseller",
+   "installUrl": "https://play.google.com/store/apps/details?id=com.smarttec.smartseller",
+   "publisher": {
+    "@id": "https://smartposapp.net/#org"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "@id": "https://smartposapp.net/#faq",
+   "inLanguage": "es-DO",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "¿Tengo que cambiar el sistema que ya uso?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. SmartPOS se instala sobre tu sistema de gestión actual. Se conecta a cualquier ERP y la conexión se prepara según las necesidades de tu empresa."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Incluye facturación electrónica?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sí. SmartPOS tiene la facturación electrónica incorporada, para que emitas tus comprobantes fiscales electrónicos (e-CF) sin depender de otra herramienta."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Puedo vender y cobrar si no hay internet?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sí. Las ventas y los cobros quedan guardados en el teléfono. Puedes continuar trabajando y, cuando vuelva la conexión, la información se envía automáticamente a tu sistema. La oficina la recibe en ese momento."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Se mantienen mis precios y condiciones de crédito?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sí. SmartPOS respeta las reglas de tu negocio. La puesta en marcha contempla tus precios, descuentos, límites de crédito y las operaciones que requieren aprobación."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿El vendedor puede imprimir donde está el cliente?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sí. La app permite imprimir facturas y recibos directamente con una impresora compatible. La impresión se realiza desde la propia app."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Cómo se manejan las aprobaciones?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Se aplican según las reglas de tu empresa. Se definen los casos que requieren autorización, como descuentos o créditos especiales, y las personas responsables de aprobarlos."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Sirve para vendedores rancheros y de preventa?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sí. SmartPOS acompaña a los equipos que visitan clientes para tomar pedidos, registrar ventas o realizar cobros. Se adapta a la operación de cada empresa."
+     }
+    }
+   ]
+  }
+ ]
+}
 </script>
 </head>
 <body>
