@@ -37,6 +37,18 @@
 .legal a { color: var(--green-ink); }
 .legal__back { display: inline-block; margin-bottom: 26px; font-weight: 600; }
 </style>
+<script>
+(function(){
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=function(){dataLayer.push(arguments)};
+  // Analytics solo cuenta visitas del sitio publicado (no pruebas locales).
+  var live=/(^|\.)smartposapp\.net$/.test(location.hostname) && location.search.indexOf('noanim')<0;
+  window.track=function(n,p){ if(live) gtag('event',n,p||{}); };
+  if(!live) return;
+  var s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id=G-PFV7B84JB6'; document.head.appendChild(s);
+  gtag('js',new Date()); gtag('config','G-PFV7B84JB6');
+})();
+</script>
 </head>
 <body>
   <header class="nav" id="top">

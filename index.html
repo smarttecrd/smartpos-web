@@ -26,6 +26,18 @@
   <meta name="theme-color" content="#2f4050">
   <link rel="icon" href="assets/icon.png" type="image/png">
   <link rel="stylesheet" href="style.css">
+<script>
+(function(){
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=function(){dataLayer.push(arguments)};
+  // Analytics solo cuenta visitas del sitio publicado (no pruebas locales).
+  var live=/(^|\.)smartposapp\.net$/.test(location.hostname) && location.search.indexOf('noanim')<0;
+  window.track=function(n,p){ if(live) gtag('event',n,p||{}); };
+  if(!live) return;
+  var s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id=G-PFV7B84JB6'; document.head.appendChild(s);
+  gtag('js',new Date()); gtag('config','G-PFV7B84JB6');
+})();
+</script>
 </head>
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -320,8 +332,8 @@
     var body={firstName:first,lastName:last,accountName:emp,phoneNumber:tel,emailAddress:mail,description:'Solicitud de demo desde la web de SmartPOS.'+(det.length?'\n'+det.join('\n'):'')};
     btn.disabled=true; say('Enviando…',true);
     send(body)
-      .then(function(r){ if(!r.ok) throw new Error(r.status); f.reset(); say('¡Gracias! Recibimos tu solicitud y te contactaremos pronto.',true); })
-      .catch(function(){ say('No pudimos enviar tu solicitud. Inténtalo de nuevo en un momento.'); })
+      .then(function(r){ if(!r.ok) throw new Error(r.status); f.reset(); if(window.track) track('generate_lead',{form_name:'demo',currency:'DOP'}); say('¡Gracias! Recibimos tu solicitud y te contactaremos pronto.',true); })
+      .catch(function(){ if(window.track) track('form_error',{form_name:'demo'}); say('No pudimos enviar tu solicitud. Inténtalo de nuevo en un momento.'); })
       .then(function(){ btn.disabled=false; });
   });
 })();
@@ -363,5 +375,29 @@
 })();
 </script>
 <script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+<script>
+(function(){
+  if(!window.track) return;
+  function sec(el){var s=el.closest('section,header,footer,aside');return s?(s.id||s.className.split(' ')[0]||s.tagName.toLowerCase()):'pagina';}
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a'); if(!a) return;
+    var href=a.getAttribute('href')||'', txt=(a.textContent||'').replace(/\s+/g,' ').trim().slice(0,60), where=sec(a);
+    if(a.classList.contains('play-badge')) return track('click_google_play',{link_location:where});
+    if(href.indexOf('logicerp.do')>-1) return track('click_logicerp',{link_location:where});
+    if(href==='#contacto') return track('cta_demo_click',{link_text:txt,link_location:where});
+    if(href==='privacidad.html'||href==='terminos.html') return track('legal_click',{link_text:txt});
+    if(a.closest('#menu')) return track('nav_click',{link_text:txt});
+    if(href.indexOf('tsi.com.do')>-1) return track('click_tsi',{link_location:where});
+  });
+  document.querySelectorAll('details').forEach(function(d){
+    d.addEventListener('toggle',function(){ if(d.open) track('faq_open',{question:(d.querySelector('summary')||{}).textContent}); });
+  });
+  var seen={}, io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(en){
+    if(en.isIntersecting&&!seen[en.target.id]){seen[en.target.id]=1;track('view_section',{section_id:en.target.id});}
+  })},{threshold:.4}):null;
+  if(io) document.querySelectorAll('main section[id]').forEach(function(s){io.observe(s)});
+  var f=document.getElementById('lead-form'); if(f){ f.addEventListener('focusin',function(){track('form_start',{form_name:'demo'})},{once:true}); }
+})();
+</script>
 </body>
 </html>
