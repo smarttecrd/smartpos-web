@@ -277,18 +277,17 @@
   </script>
 <script>
 (function(){
-  var API_URL='https://crm.tsi.com.do/api/v1/LeadCapture/da7f64eaae5e8f03bc23ada38a9b8190';
   var FORM_URL='https://crm.tsi.com.do/api/v1/LeadCapture/form/6b098221d08b4d4f1';
-  var SITE_KEY=/(^|\.)smartposapp\.net$/.test(location.hostname)?'6Le7WDUuAAAAAM76sCCCA_MEmdJNTtykg3CLbK6u':''; // En smartposapp.net se usa FORM_URL con reCAPTCHA v3; en otros dominios, API_URL.
+  var SITE_KEY='6Le7WDUuAAAAAM76sCCCA_MEmdJNTtykg3CLbK6u'; // clave pública de reCAPTCHA v3 (dominios: smartposapp.net)
   var captchaP;
-  function loadCaptcha(){ if(!SITE_KEY) return Promise.resolve(); return captchaP||(captchaP=new Promise(function(ok,fail){var s=document.createElement('script');s.src='https://www.google.com/recaptcha/api.js?render='+encodeURIComponent(SITE_KEY);s.onload=function(){grecaptcha.ready(ok)};s.onerror=function(){fail(new Error('captcha'))};document.head.appendChild(s);})); }
+  function loadCaptcha(){ return captchaP||(captchaP=new Promise(function(ok,fail){var s=document.createElement('script');s.src='https://www.google.com/recaptcha/api.js?render='+encodeURIComponent(SITE_KEY);s.onload=function(){grecaptcha.ready(ok)};s.onerror=function(){fail(new Error('captcha'))};document.head.appendChild(s);})); }
   function send(body){
-    var h={'Content-Type':'application/json'}, url=API_URL, pre=Promise.resolve();
-    if(SITE_KEY){ url=FORM_URL; pre=loadCaptcha().then(function(){return grecaptcha.execute(SITE_KEY,{action:'leadCaptureSubmit'})}).then(function(t){h['X-Captcha-Token']=t}); }
-    return pre.then(function(){return fetch(url,{method:'POST',headers:h,body:JSON.stringify(body)})});
+    return loadCaptcha().then(function(){return grecaptcha.execute(SITE_KEY,{action:'leadCaptureSubmit'})}).then(function(t){
+      return fetch(FORM_URL,{method:'POST',headers:{'Content-Type':'application/json','X-Captcha-Token':t},body:JSON.stringify(body)});
+    });
   }
   var f=document.getElementById('lead-form'); if(!f) return;
-  if(SITE_KEY) f.addEventListener('focusin',function(){loadCaptcha().catch(function(){})},{once:true});
+  f.addEventListener('focusin',function(){loadCaptcha().catch(function(){})},{once:true});
   var msg=document.getElementById('lead-msg'), btn=f.querySelector('button[type=submit]');
   function say(t,ok){msg.textContent=t;msg.className='lead-form__msg '+(ok?'is-ok':'is-err');}
   f.addEventListener('submit',function(e){
