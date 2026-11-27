@@ -53,6 +53,14 @@
    "name": "SmartPOS",
    "url": "https://smartposapp.net/",
    "logo": "https://smartposapp.net/assets/icon-512.png",
+   "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "sales",
+    "telephone": "+1-809-595-9437",
+    "email": "contactenos@tsi.com.do",
+    "areaServed": "DO",
+    "availableLanguage": "es"
+   },
    "parentOrganization": {
     "@type": "Organization",
     "name": "TSI Dominicana",
@@ -160,6 +168,8 @@
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" hidden><span>Menú</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#menu"></use></svg></button>
       <nav class="nav__links" id="menu" aria-label="Navegación principal">
         <a href="#beneficios">Ventajas</a><a href="#app">La app</a><a href="#imprime">Impresión</a><a href="#facturacion-electronica">e-CF</a><a href="#para-quien">Para quién es</a><a href="#como">Cómo empezar</a><a href="#preguntas">Preguntas</a>
+        <a class="nav-icon nav-icon--ws" href="https://wa.me/18095959437?text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20SmartPOS" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp" title="Escribir por WhatsApp"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.6-4.6A8.5 8.5 0 1 1 8 19.6L3 21z"></path><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.5-1.5-2.2-1.2-1 .8c-1-.4-2-1.4-2.4-2.4l.8-1L9.9 7 9 8.5z" fill="currentColor" stroke-width="1"></path></svg><span class="nav-icon__txt">WhatsApp</span></a>
+        <a class="nav-icon nav-icon--mail" href="mailto:contactenos@tsi.com.do?subject=SmartPOS" aria-label="Escribir por correo" title="Escribir por correo"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg><span class="nav-icon__txt">Correo</span></a>
         <a class="btn btn--small" href="#contacto">Quiero una demo <span aria-hidden="true">↗</span></a>
       </nav>
     </div>
@@ -495,6 +505,8 @@
   document.addEventListener('click',function(e){
     var a=e.target.closest('a'); if(!a) return;
     var href=a.getAttribute('href')||'', txt=(a.textContent||'').replace(/\s+/g,' ').trim().slice(0,60), where=sec(a);
+    if(a.classList.contains('nav-icon--ws')) return track('click_whatsapp',{link_location:'menu'});
+    if(a.classList.contains('nav-icon--mail')) return track('click_email',{link_location:'menu'});
     if(a.classList.contains('play-badge')) return track('click_google_play',{link_location:where});
     if(href.indexOf('logicerp.do')>-1) return track('click_logicerp',{link_location:where});
     if(href==='#contacto') return track('cta_demo_click',{link_text:txt,link_location:where});
