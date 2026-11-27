@@ -495,11 +495,18 @@ a.card-note { display: flex; align-items: center; justify-content: space-between
 @media (max-width: 960px) { .ecf { grid-template-columns: 1fr; gap: 32px; } }
 
 /* Iconos de contacto en el menú (WhatsApp y correo), como en tsi.com.do */
-.nav__links > .nav-icon { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 40px; height: 40px; padding: 0; border: 1px solid #ffffff40; border-radius: 8px; color: #e0e7eb; background: #ffffff0d; transition: color .2s, border-color .2s, background .2s; }
-.nav__links > .nav-icon:hover { color: #08302a; background: var(--green-light); border-color: var(--green-light); }
+.nav__links .nav-icon { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 40px; height: 40px; padding: 0; border: 1px solid #ffffff40; border-radius: 8px; color: #e0e7eb; background: #ffffff0d; transition: color .2s, border-color .2s, background .2s; }
+.nav__links .nav-icon:hover { color: #08302a; background: var(--green-light); border-color: var(--green-light); }
 .nav-icon__txt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (max-width: 720px) {
-  .nav__links > .nav-icon { width: auto; height: auto; min-height: 44px; justify-content: flex-start; padding: 12px 0; border: 0; border-top: 1px solid #ffffff18; border-radius: 0; background: transparent; }
-  .nav__links > .nav-icon:hover { color: var(--green-light); background: transparent; }
+  .nav__links .nav-icon { width: auto; height: auto; min-height: 44px; justify-content: flex-start; padding: 12px 0; border: 0; border-top: 1px solid #ffffff18; border-radius: 0; background: transparent; }
+  .nav__links .nav-icon:hover { color: var(--green-light); background: transparent; }
   .nav-icon__txt { position: static; width: auto; height: auto; overflow: visible; clip: auto; font-size: .9rem; font-weight: 550; }
+}
+
+/* Iconos y botón de la demo juntos */
+.nav-cta { display: flex; align-items: center; gap: 8px; }
+@media (max-width: 720px) {
+  .nav-cta { display: contents; }
+  .nav-cta > .btn { margin-top: 10px; }
 }
