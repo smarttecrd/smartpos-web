@@ -505,7 +505,7 @@ a.card-note { display: flex; align-items: center; justify-content: space-between
 }
 
 /* Iconos y botón de la demo juntos */
-.nav-cta { display: flex; align-items: center; gap: 8px; }
+.nav-cta { display: flex; align-items: center; gap: 14px; }
 @media (max-width: 720px) {
   .nav-cta { display: contents; }
   .nav-cta > .btn { margin-top: 10px; }
